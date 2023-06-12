@@ -1,0 +1,55 @@
+<html lang="en">
+<%- include("./partials/head.ejs") %>
+
+<body>
+    <nav>
+    <div class="site-title">
+        <a href="/"><h1>Spoon And Fork</h1></a>
+    </div>
+    <div class="search-bar">
+        <ion-icon name="search-outline"></ion-icon>
+        <form onsubmit="updateQueryString(event)">
+            <input type="text" placeholder="Quick Search" id="search">
+        </form>
+    </div>
+    </nav>
+  <div class="Menu-List">
+    <% for (var i = 0; i < foodItems.length; i++) { %>
+        <div class="Menu-Item">
+        <img src="<%= foodItems[i].image %>" alt="<%= foodItems[i].name %>">
+        <div class="info">
+            <h3><%= foodItems[i].name %></h3>
+            <p><%= foodItems[i].desc %></p>
+        </div>
+        <div class="Price-Info">
+            <h3>Price</h3>
+            <p><%= foodItems[i].price %></p>
+            <button type="button" onclick="showPopup()">Add To Cart</button>
+        </div>
+        </div>
+    <% } %>
+  </div>
+  <div id="popup">Added to cart!</div>
+  <script type="module" src="https://unpkg.com/ionicons@5.0.0/dist/ionicons/ionicons.esm.js"></script>
+  <script>
+    function updateQueryString(event) {
+    event.preventDefault(); 
+    
+    const searchInput = document.getElementById('search');
+    let searchQuery = searchInput.value;
+    searchQuery = searchInput.value.trim();
+    
+    const newUrl = '?name=' + searchQuery;
+    window.location.search = newUrl;
+    }
+
+    function showPopup() {
+        var popup = document.getElementById("popup");
+        popup.classList.add("show");
+      setTimeout(function() {
+          popup.classList.remove("show");
+        }, 3000);
+      }
+    </script>
+</body>
+</html>
