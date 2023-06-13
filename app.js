@@ -13,7 +13,7 @@ app.set('view engine', 'ejs');
 
 // middleware & static files
 app.use(express.static('public'));
-
+app.use(express.urlencoded({extended:true}))
 app.use(morgan('dev'));
 
 app.get('/', (req, res) => {
@@ -39,16 +39,16 @@ app.post('/Login', (req, res) => {
 
 app.get('/Menu', (req, res) => {
   const foodItems=require("./foodItems.js");
-  // console.log(req.query);
+  res.render('Menu', { title: 'Menu',foodItems:foodItems});
+});
+
+app.post('/Menu',(req,res)=>{
+  const foodItems=require("./foodItems.js");
   let filteredFoods=[];
-  const SearchQuery=req.query.name;
-  if (SearchQuery==undefined){
-    filteredFoods=foodItems;
-  }else{
-    filteredFoods = foodItems.filter(item => {
-      return item.name.toLowerCase().includes(SearchQuery.toLowerCase());
-    });
-  }
+  const SearchQuery=req.body.search;
+  filteredFoods = foodItems.filter(item => {
+    return item.name.toLowerCase().includes(SearchQuery.toLowerCase());
+  });
   res.render('Menu', { title: 'Menu',foodItems:filteredFoods});
 });
 
