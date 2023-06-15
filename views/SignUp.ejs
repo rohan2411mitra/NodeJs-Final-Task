@@ -10,14 +10,24 @@
             <form action="/Signup" method="post">
                 <h2>Sign Up</h2>
                 <div class="inputbox">
+                    <ion-icon name="person-outline"></ion-icon>
+                    <input type="text" name="first_name" placeholder="" required>
+                    <label>First Name</label>
+                </div>
+                <div class="inputbox">
+                    <ion-icon name="person-outline"></ion-icon>
+                    <input type="text" name="last_name" placeholder="" required>
+                    <label>Last Name</label>
+                </div>
+                <div class="inputbox">
                     <ion-icon name="mail-outline"></ion-icon>
-                    <input type="email" required title="email" placeholder="">
-                    <label for="">Email</label>
+                    <input type="email" name="email" placeholder="" required>
+                    <label>Email</label>
                 </div>
                 <div class="inputbox">
                     <ion-icon name="lock-closed-outline"></ion-icon>
-                    <input type="password" required title="password" placeholder="">
-                    <label for="">Password</label>
+                    <input type="password" name="password" placeholder="" required>
+                    <label>Password</label>
                 </div>
                 <button type="submit">Sign Up</button>
                 <div class="register">
