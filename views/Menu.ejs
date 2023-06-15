@@ -2,7 +2,7 @@
 <%- include("./partials/head.ejs") %>
 
 <body>
-    <nav>
+    <nav class="Menu-Extra">
     <div class="site-title">
         <a href="/"><h1>Spoon And Fork</h1></a>
     </div>
@@ -13,6 +13,10 @@
         </form>
     </div>
     </nav>
+    <ul class="Links">
+      <li><a href="/Logout">Logout</a></li>
+    </ul>
+      
   <%if (success.length>0) { %>
     <div class="alert alert-success">
       <%= success %>

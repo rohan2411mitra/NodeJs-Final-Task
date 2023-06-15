@@ -46,7 +46,8 @@ nav ul{
 }
 nav li{
   list-style-type: none;
-  margin-left: 20px;
+  margin-left: 15px;
+  margin-right: 5px;
 }
 nav h1{
   font-size: 3em;
@@ -336,4 +337,34 @@ padding: 15px;
   color: #a94442;
   background-color: #f2dede;
   border-color: #ebccd1;
+}
+
+.Menu-Extra{
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+}
+
+.Links {
+  width:100%;
+  display: flex;
+  justify-content: flex-end;
+  list-style: none;
+  position: relative;
+  top:-40px;
+  background-color: #777;
+  margin: 0;
+  padding: 2px 5px;
+  border-bottom-left-radius: 6px;
+  border-bottom-right-radius: 6px;
+}
+
+.links li {
+  list-style-type: none;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.links a{
+  color: white;
+  font-weight: 300;
 }

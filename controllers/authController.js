@@ -75,10 +75,22 @@ const login = (req,res) =>{
     })
 }
 
+const logout = (req,res) =>{
+    try{
+        res.clearCookie("uid");
+        console.log("Logout Successful!");
+        res.redirect("/");
+    } catch (err){
+        console.log(err);
+        res.redirect("/404");
+    }
+}
+
 
 module.exports={
     register,
     Signdisplay,
     Logindisplay,
-    login
+    login,
+    logout
 }

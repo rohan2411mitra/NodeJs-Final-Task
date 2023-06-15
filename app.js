@@ -5,10 +5,8 @@ const flash=require('connect-flash');
 const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
 
-const foodItems = require('./foodItems.js');
 const MenuRoutes=require("./routes/menuRoutes.js");
 const AuthRoutes=require("./routes/authRoutes.js");
-
 
 
 // express app
