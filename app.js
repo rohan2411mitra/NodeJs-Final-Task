@@ -4,6 +4,7 @@ const foodItems = require('./foodItems.js');
 const mongoose = require('mongoose');
 const MenuRoutes=require("./routes/menuRoutes.js")
 const AuthRoutes=require("./routes/authRoutes.js")
+const cookieParser = require('cookie-parser');
 
 // express app
 const app = express();
@@ -11,7 +12,7 @@ const app = express();
 const dbURI = "mongodb+srv://rohan:6hu8KmcTqgfMSIvg@restaurantdb.q8fzdh8.mongodb.net/?retryWrites=true&w=majority";
 
 mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
-.then(result => console.log("Connected to Database"))
+.then(() => console.log("Connected to Database"))
 .catch(err => console.log(err));
 
 //Listen to requests
@@ -24,33 +25,25 @@ app.set('view engine', 'ejs');
 app.use(express.static('public'));
 app.use(express.urlencoded({extended:true}))
 app.use(morgan('dev'));
+app.use(cookieParser());
 
 //Homepage
 app.get('/', (req, res) => {
-  const foodItems=require("./foodItems.js");
-  res.render('HomePage', { title: 'Home',foodItems});
+  res.render('HomePage', { title: 'Home'});
 });
 
-//Login and SignUp pages
-// app.get('/SignUp', (req, res) => {
-//   res.render('SignUp', { title: 'Sign Up'});
+
+// app.get('/Login', (req, res) => {
+//   res.render('Login', { title: 'Login'});
 // });
 
-// app.post('/SignUp', (req, res) => {
+// app.post('/Login', (req, res) => {
 //   res.redirect('/Menu');
 // });
 
-app.get('/Login', (req, res) => {
-  res.render('Login', { title: 'Login'});
-});
-
-app.post('/Login', (req, res) => {
-  res.redirect('/Menu');
-});
-
 //Menu Routes
+app.use(AuthRoutes);
 app.use('/menu',MenuRoutes);
-app.use('/SignUp',AuthRoutes);
 
 // 404 page
 app.use((req, res) => {
