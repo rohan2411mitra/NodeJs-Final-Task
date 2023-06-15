@@ -13,7 +13,9 @@ const Logindisplay = (req,res)=>{
 const register = (req,res) =>{
     bcrypt.hash(req.body.password, 10, function(err,hashedPass){
         if (err){
+            req.flash("err",err)
             console.log(err);
+            res.redirect('/SignUp')
         }
 
         let user = new User({
@@ -25,11 +27,16 @@ const register = (req,res) =>{
     
         user.save()
         .then(()=>{
+            req.flash("success","User Added Successfully!")
             console.log("User Added Successfully!");
+            let token = jwt.sign({first_name : user.first_name,last_name:user.last_name,email:user.email},"Secret Value")
+            res.cookie("uid",token);
             res.redirect("/Menu");
         })
         .catch((err) =>{
+            req.flash("err",err)
             console.log(err);
+            res.redirect('/SignUp')
         })
 
     })
@@ -44,19 +51,26 @@ const login = (req,res) =>{
         if (user){
             bcrypt.compare(password,user.password, function(err,result){
                 if (err){
+                    req.flash('err',err);
                     console.log(err);
+                    res.redirect('/Login')
                 }
                 if (result){
-                    let token = jwt.sign({first_name : user.first_name,last_name:user.last_name,email:user.email},"Secret Value")
+                    req.flash('success','Login Successful');
                     console.log("Login Successful");
+                    let token = jwt.sign({first_name : user.first_name,last_name:user.last_name,email:user.email},"Secret Value")
                     res.cookie("uid",token);
                     res.redirect("/Menu");
                 }else{
+                    req.flash('err','Password does not match!');
                     console.log("Password does not match!")
+                    res.redirect("/Login")
                 }
             })
         }else{
-            console.log("No User Found")
+            req.flash('err','No Such User Found');
+            console.log("No Such User Found")
+            res.redirect("/Login")
         }
     })
 }

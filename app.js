@@ -1,10 +1,15 @@
 const express = require('express');
 const morgan = require('morgan');
-const foodItems = require('./foodItems.js');
+const session=require('express-session');
+const flash=require('connect-flash');
 const mongoose = require('mongoose');
-const MenuRoutes=require("./routes/menuRoutes.js")
-const AuthRoutes=require("./routes/authRoutes.js")
 const cookieParser = require('cookie-parser');
+
+const foodItems = require('./foodItems.js');
+const MenuRoutes=require("./routes/menuRoutes.js");
+const AuthRoutes=require("./routes/authRoutes.js");
+
+
 
 // express app
 const app = express();
@@ -25,24 +30,33 @@ app.set('view engine', 'ejs');
 app.use(express.static('public'));
 app.use(express.urlencoded({extended:true}))
 app.use(morgan('dev'));
+
+//cookie store middleware
 app.use(cookieParser());
+
+//session middleware
+app.use(session({
+  secret:'nodejs',
+  saveUninitialized:true,
+  resave:true
+}));
+app.use(flash())
+
+app.use((req,res,next)=>{
+  res.locals.success= req.flash('success');
+  res.locals.err= req.flash('err');
+  next();
+})
 
 //Homepage
 app.get('/', (req, res) => {
   res.render('HomePage', { title: 'Home'});
 });
 
-
-// app.get('/Login', (req, res) => {
-//   res.render('Login', { title: 'Login'});
-// });
-
-// app.post('/Login', (req, res) => {
-//   res.redirect('/Menu');
-// });
+//SignUp/Login ROutes
+app.use(AuthRoutes);
 
 //Menu Routes
-app.use(AuthRoutes);
 app.use('/menu',MenuRoutes);
 
 // 404 page

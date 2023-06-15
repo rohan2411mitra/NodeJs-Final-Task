@@ -13,6 +13,11 @@
         </form>
     </div>
     </nav>
+  <%if (success.length>0) { %>
+    <div class="alert alert-success">
+      <%= success %>
+    </div>
+  <% } %>
   <div class="Menu-List">
     <% for (var i = 0; i < foodItems.length; i++) { %>
         <div class="Menu-Item">

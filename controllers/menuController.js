@@ -2,7 +2,7 @@ const foodItems=require("../foodItems.js");
 const jwt= require('jsonwebtoken');
 
 const menu_all = (req,res) =>{
-    res.render('Menu', { title: 'Menu', foodItems:foodItems});
+    res.render('Menu', { title:'Menu', foodItems:foodItems});
 }
 
 
