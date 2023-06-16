@@ -7,7 +7,7 @@ const cookieParser = require('cookie-parser');
 
 const MenuRoutes=require("./routes/menuRoutes.js");
 const AuthRoutes=require("./routes/authRoutes.js");
-
+const UserRoutes=require("./routes/userRoutes.js");
 
 // express app
 const app = express();
@@ -55,7 +55,10 @@ app.get('/', (req, res) => {
 app.use(AuthRoutes);
 
 //Menu Routes
-app.use('/menu',MenuRoutes);
+app.use('/Menu',MenuRoutes);
+
+//User Routes
+app.use('/User',UserRoutes);
 
 // 404 page
 app.use((req, res) => {

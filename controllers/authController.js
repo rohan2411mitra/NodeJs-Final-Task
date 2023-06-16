@@ -45,7 +45,7 @@ const register = (req,res) =>{
 const login = (req,res) =>{
     let email = req.body.email
     let password = req.body.password
-
+    let remember = req.body.remember
     User.findOne({email:email})
     .then(user =>{
         if (user){
@@ -58,7 +58,10 @@ const login = (req,res) =>{
                 if (result){
                     req.flash('success','Login Successful');
                     console.log("Login Successful");
-                    let token = jwt.sign({first_name : user.first_name,last_name:user.last_name,email:user.email},"Secret Value")
+                    let token = jwt.sign({first_name : user.first_name,last_name:user.last_name,email:user.email},"Secret Value",{expiresIn:"1h"})
+                    if (remember=="yes"){
+                        token = jwt.sign({first_name : user.first_name,last_name:user.last_name,email:user.email},"Secret Value")
+                    }                     
                     res.cookie("uid",token);
                     res.redirect("/Menu");
                 }else{

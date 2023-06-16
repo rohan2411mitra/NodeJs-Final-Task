@@ -23,14 +23,18 @@ function AuthCheck(req, res, next) {
     if (token) {
         jwt.verify(token, "Secret Value", (err, decoded) => {
             if (err) {
-            res.redirect('/');
+                req.flash('err','Login First!');
+                console.log("Not Loged In!");
+                res.redirect('/Login');
             } else {
-            req.user = decoded;
-            next();
+                req.user = decoded;
+                next();
             }
     });
     } else {
-        res.redirect('/');
+        req.flash('err','Login First!');
+        console.log("Not Loged In!");
+        res.redirect('/Login');
     }
     
   }

@@ -1,0 +1,31 @@
+<html lang="en">
+<%- include("./partials/head.ejs") %>
+
+<body>
+    <nav class="Menu-Extra">
+    <div class="site-title">
+        <a href="/"><h1>Spoon And Fork</h1></a>
+    </div>
+    <div class="search-bar">
+        <ion-icon name="search-outline"></ion-icon>
+        <form action="/Menu" method="POST">
+            <input type="text" placeholder="Quick Search" id="search" name="search">
+        </form>
+    </div>
+    </nav>
+    <ul class="Links">
+      <li><a href="/User/Profile">User Profile</a></li>
+      <li><a href="/Logout">Logout</a></li>
+    </ul>
+    <section class="Profile-Box">
+        <div class="Profile-Info">
+            <h1>User Profile</h1>
+            <ion-icon name="person-circle-outline"></ion-icon>
+            <p><strong>First Name: </strong><%=first_name%></p>
+            <p><strong>Last Name: </strong><%=last_name%></p>
+            <p><strong>Email: </strong><%=email%></p>
+        </div>
+    </section>
+    <script type="module" src="https://unpkg.com/ionicons@5.0.0/dist/ionicons/ionicons.esm.js"></script>
+</body>
+</html>
