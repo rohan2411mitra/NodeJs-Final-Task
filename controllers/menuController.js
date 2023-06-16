@@ -1,10 +1,10 @@
 const foodItems=require("../foodItems.js");
 const jwt= require('jsonwebtoken');
+const Cart=require('../models/Cart');
 
 const menu_all = (req,res) =>{
     res.render('Menu', { title:'Menu', foodItems:foodItems});
 }
-
 
 const menu_search = (req,res) =>{
     let filteredFoods=[];
@@ -14,7 +14,6 @@ const menu_search = (req,res) =>{
     });
     res.render('Menu', { title: 'Menu',foodItems:filteredFoods});
 }
-
 
 function AuthCheck(req, res, next) {
 
@@ -39,9 +38,23 @@ function AuthCheck(req, res, next) {
     
   }
 
+function AddToCart(req,res,next){
+    product={
+        "id" : req.body.foodId,
+        "name" : req.body.foodName,
+        "price" : parseFloat(req.body.foodPrice.substring(1)),
+        "image" : req.body.foodImage
+    }
+    Cart.save(product);
+    console.log(Cart.getCart());
+    console.log("Saved");
+    res.status(204).end()
+}
+
 
 module.exports={
     menu_all,
     menu_search,
-    AuthCheck
+    AuthCheck,
+    AddToCart
 }

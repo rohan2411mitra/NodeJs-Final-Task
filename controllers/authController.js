@@ -59,7 +59,7 @@ const login = (req,res) =>{
                     req.flash('success','Login Successful');
                     console.log("Login Successful");
                     let token = jwt.sign({first_name : user.first_name,last_name:user.last_name,email:user.email},"Secret Value",{expiresIn:"1h"})
-                    if (remember=="yes"){
+                    if (remember=="Yes"){
                         token = jwt.sign({first_name : user.first_name,last_name:user.last_name,email:user.email},"Secret Value")
                     }                     
                     res.cookie("uid",token);

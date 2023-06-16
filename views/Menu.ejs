@@ -2,21 +2,7 @@
 <%- include("./partials/head.ejs") %>
 
 <body>
-    <nav class="Menu-Extra">
-    <div class="site-title">
-        <a href="/"><h1>Spoon And Fork</h1></a>
-    </div>
-    <div class="search-bar">
-        <ion-icon name="search-outline"></ion-icon>
-        <form action="/Menu" method="POST">
-            <input type="text" placeholder="Quick Search" id="search" name="search">
-        </form>
-    </div>
-    </nav>
-    <ul class="Links">
-      <li><a href="/User/Profile">User Profile</a></li>
-      <li><a href="/Logout">Logout</a></li>
-    </ul>
+  <%- include("./partials/links.ejs") %>
       
   <%if (success.length>0) { %>
     <div class="alert alert-success">
@@ -34,7 +20,13 @@
         <div class="Price-Info">
             <h3>Price</h3>
             <p><%= foodItems[i].price %></p>
-            <button type="button" onclick="showPopup()">Add To Cart</button>
+            <form class="my-form" action="/Menu/Add-to-Cart" method="POST">
+              <input type="hidden" name="foodId" value="<%= foodItems[i].id %>">
+              <input type="hidden" name="foodName" value="<%= foodItems[i].name %>">
+              <input type="hidden" name="foodPrice" value="<%= foodItems[i].price %>">
+              <input type="hidden" name="foodImage" value="<%= foodItems[i].image %>">
+              <button type="button" onclick="showPopup()">Add To Cart</button>
+            </form>
         </div>
         </div>
     <% } %>
@@ -58,7 +50,9 @@
         popup.classList.add("show");
       setTimeout(function() {
           popup.classList.remove("show");
-        }, 3000);
+        }, 2000);
+        const form = event.target.closest('.my-form');
+        form.submit();
       }
     </script>
 </body>

@@ -316,7 +316,7 @@ padding: 15px;
 
 #popup.show {
   display: block;
-  animation: hide-popup 3s ease-in-out;
+  animation: hide-popup 2s ease-in-out;
 }
 
 @keyframes hide-popup {
@@ -421,4 +421,118 @@ padding: 15px;
 .Profile-Info ion-icon{
   font-size: 150px;
   color: aliceblue;
+}
+
+/* Order Summary Page */
+.Center-Box{
+  display: flex;
+  justify-content: center;
+}
+.Order-List{
+  display: flex;
+  flex-wrap: wrap;
+  width: 800px;
+  justify-content: space-between;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+  
+.Order-Item{
+  height: 140px;
+  display: flex;
+  margin: 10px 15px;
+  background-color: #eadede;
+  border: 1px solid #777;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.20), 0 1px 2px rgba(0, 0, 0, 0.40);
+  transition: box-shadow 0.2s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.Order-Item:hover {
+  box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.2);
+  transform: scale(1.02);
+}
+
+.Order-Item img {
+  width: 100px;
+  height: 100%;
+  margin-right: 10px;
+  border-right: 1px solid #777;
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+}
+
+.Order-Item .info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 115px;
+  padding: 5px;
+  overflow: auto;
+  justify-content: center;
+  align-items: center;
+}
+
+.Order-Item .info h3 {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.Order-Item .info button {
+  height:auto;
+  padding: 5px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  border-radius: 10px;
+  font-size: 0.8em;
+}
+
+.Order-Item .info p {
+  font-size: 1.04rem;
+  margin-bottom: 0;
+  margin-top: 5px;
+}
+
+.Order-price-info{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 8px;
+}
+
+.Order-price-info h3,p{
+  margin-top: 0;
+  margin-bottom: 5px;
+  font-size: 1em;
+}
+
+.Order-Page{
+  text-align: center;
+  margin-bottom: 8px;
+}
+
+.Price-summary{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #777;
+  padding: 10px 10px;
+  border-radius: 5px;
+}
+
+.Price-summary p{
+  font-weight: bold;
+  font-size: 1.4rem;
+  color: white;
+}
+
+.Price-summary button{
+  width: auto;
+  color: black;
+  background-color: greenyellow;
 }

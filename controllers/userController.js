@@ -1,4 +1,5 @@
 const jwt= require('jsonwebtoken');
+const Cart=require('../models/Cart');
 
 const profile_Display = (req, res) => {
     // Retrieve the JWT token from the cookie
@@ -16,6 +17,38 @@ const profile_Display = (req, res) => {
     res.render('Profile', { title:"Profile",first_name, last_name, email });
   }
 
+const cart_Display =(req,res) =>{
+  const cart= Cart.getCart()
+  let Products=[]
+  let totPrice=0
+  if (cart!== null){
+    Products= Cart.getCart().products
+    totPrice = Cart.getCart().totalPrice
+  }
+  res.render('Order',{title:"Cart", Products,totPrice});
+}
+
+const cart_Check =(req,res) =>{
+  const cart= Cart.getCart()
+  let check_id=req.body.Id
+  let Products=Cart.getCart().products
+  const ProductIndex = Products.findIndex(p => p.id == check_id);
+  let product = Products[ProductIndex];
+  console.log(product);
+  let val=req.body.action;
+  if (val=="Add"){
+    Cart.save(product);
+  }
+  else if (val=="Remove"){
+    Cart.delete(check_id);
+  }
+  Products=Cart.getCart().products
+  let totPrice=Cart.getCart().totalPrice
+  res.render('Order',{title:"Cart", Products,totPrice});
+}
+
   module.exports={
-    profile_Display
+    profile_Display,
+    cart_Display,
+    cart_Check,
   }

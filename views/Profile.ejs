@@ -2,21 +2,7 @@
 <%- include("./partials/head.ejs") %>
 
 <body>
-    <nav class="Menu-Extra">
-    <div class="site-title">
-        <a href="/"><h1>Spoon And Fork</h1></a>
-    </div>
-    <div class="search-bar">
-        <ion-icon name="search-outline"></ion-icon>
-        <form action="/Menu" method="POST">
-            <input type="text" placeholder="Quick Search" id="search" name="search">
-        </form>
-    </div>
-    </nav>
-    <ul class="Links">
-      <li><a href="/User/Profile">User Profile</a></li>
-      <li><a href="/Logout">Logout</a></li>
-    </ul>
+    <%- include("./partials/links.ejs") %>
     <section class="Profile-Box">
         <div class="Profile-Info">
             <h1>User Profile</h1>
