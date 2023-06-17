@@ -37,6 +37,10 @@ class Cart {
         }
     }
 
+    static clearCart() {
+        cart=null;
+    }
+
 }
 
 module.exports = Cart;

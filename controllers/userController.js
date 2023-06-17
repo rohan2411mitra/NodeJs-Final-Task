@@ -74,6 +74,7 @@ const cart_Confirmed=(req,res) =>{
     .then(()=>{
       req.flash("success","Order Placed Successfully!");
       console.log("Order Placed Successfully!");
+      Cart.clearCart();
       res.redirect('/User/Profile');
     })
     .catch((err) =>{
