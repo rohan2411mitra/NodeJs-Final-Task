@@ -3,19 +3,20 @@ const Cart=require('../models/Cart');
 const User = require("../models/User");
 
 const profile_Display = (req, res) => {
-    // Retrieve the JWT token from the cookie
-    const token = req.cookies.uid;
-  
-    // Decode the JWT token to access user information
-    const decodedToken = jwt.decode(token);
-  
-    // Extract the user information from the decoded token
-    const first_name = decodedToken.first_name;
-    const last_name = decodedToken.last_name;
-    const email = decodedToken.email;
 
-    // Render the profile page with the user information
-    res.render('Profile', { title:"Profile",first_name, last_name, email });
+    const first_name = req.user.first_name;
+    const last_name = req.user.last_name;
+    const email = req.user.email;
+    
+    User.findOne({email:email})
+    .then(user=>{
+      const p_orders=user.past_orders
+      res.render('Profile', { title:"Profile",first_name, last_name, email, p_orders});
+    })
+    .catch((err) =>{
+      console.log(err);
+      res.redirect('/')
+    })    
   }
 
 const cart_Display =(req,res) =>{
