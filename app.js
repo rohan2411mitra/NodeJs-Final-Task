@@ -8,11 +8,12 @@ const cookieParser = require('cookie-parser');
 const MenuRoutes=require("./routes/menuRoutes.js");
 const AuthRoutes=require("./routes/authRoutes.js");
 const UserRoutes=require("./routes/userRoutes.js");
+const config = require('./config.js');
 
 // express app
 const app = express();
 
-const dbURI = "mongodb+srv://rohan:6hu8KmcTqgfMSIvg@restaurantdb.q8fzdh8.mongodb.net/?retryWrites=true&w=majority";
+const dbURI = config.dbURI;
 
 mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
 .then(() => console.log("Connected to Database"))
