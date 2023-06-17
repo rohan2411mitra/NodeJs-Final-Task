@@ -3,7 +3,7 @@ const jwt= require('jsonwebtoken');
 const Cart=require('../models/Cart');
 
 const menu_all = (req,res) =>{
-    res.render('Menu', { title:'Menu', foodItems:foodItems});
+    res.render('Menu', { title:'Menu', foodItems:foodItems, search:true});
 }
 
 const menu_search = (req,res) =>{
@@ -12,7 +12,7 @@ const menu_search = (req,res) =>{
     filteredFoods = foodItems.filter(item => {
         return item.name.toLowerCase().includes(SearchQuery.toLowerCase());
     });
-    res.render('Menu', { title: 'Menu',foodItems:filteredFoods});
+    res.render('Menu', { title: 'Menu',foodItems:filteredFoods, search:true});
 }
 
 function AuthCheck(req, res, next) {

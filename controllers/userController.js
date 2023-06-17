@@ -1,5 +1,6 @@
 const jwt= require('jsonwebtoken');
 const Cart=require('../models/Cart');
+const User = require("../models/User");
 
 const profile_Display = (req, res) => {
     // Retrieve the JWT token from the cookie
@@ -44,11 +45,50 @@ const cart_Check =(req,res) =>{
   }
   Products=Cart.getCart().products
   let totPrice=Cart.getCart().totalPrice
-  res.render('Order',{title:"Cart", Products,totPrice});
+  res.render('Order',{title:"Cart", Products, totPrice});
+}
+
+const cart_Confirm = (req,res) =>{
+  const cart= Cart.getCart()
+  if (cart== null){
+    res.redirect("/User/Order")
+  }
+  let Products=Cart.getCart().products
+  let totPrice=Cart.getCart().totalPrice
+  res.render('Confirm',{title:"Confirm", Products, totPrice})
+}
+
+const cart_Confirmed=(req,res) =>{
+  check_email=req.user.email;
+  User.findOne({email:check_email})
+  .then(user=>{
+    let cart=Cart.getCart()
+    const order={
+      items : cart.products,
+      totalPrice : cart.totalPrice,
+      date : Date.now()
+    }
+    console.log(order);
+    user.past_orders.push(order);
+    user.save()
+    .then(()=>{
+      req.flash("success","Order Placed Successfully!");
+      console.log("Order Placed Successfully!");
+      res.redirect('/User/Profile');
+    })
+    .catch((err) =>{
+      req.flash("err","Some Error Occured")
+      console.log(err);
+      res.redirect('/User/Profile')
+    })
+    
+  })
 }
 
   module.exports={
     profile_Display,
     cart_Display,
     cart_Check,
+    cart_Confirm,
+    cart_Confirmed
   }

@@ -32,13 +32,13 @@
         <div class="Price-summary">
             <%= console.log(totPrice) %>
             <p>Total Price : $ <%= totPrice %></p>
-            <button>Proceed to confirmation</button>
+            <form action="/User/Confirm" method="POST">
+                <button type="submit">Proceed to confirmation</button>
+            </form>
         </div>
 
     <% } else {%>
         <p class="Order-Page">No Products added to Cart</p>
     <% } %>
-      
-    <script type="module" src="https://unpkg.com/ionicons@5.0.0/dist/ionicons/ionicons.esm.js"></script>
 </body>
 </html>

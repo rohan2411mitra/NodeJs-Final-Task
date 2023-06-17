@@ -3,6 +3,16 @@
 
 <body>
     <%- include("./partials/links.ejs") %>
+    <%if (success.length>0) { %>
+        <div class="alert alert-success">
+          <%= success %>
+        </div>
+    <% }%>
+    <%if (err.length>0) { %>
+        <div class="alert alert-danger">
+          <%= err %>
+        </div>
+      <% } %>
     <section class="Profile-Box">
         <div class="Profile-Info">
             <h1>User Profile</h1>

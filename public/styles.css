@@ -57,6 +57,17 @@ nav p, nav a{
   font-weight: 300;
 }
 
+/* 404 Page style */
+.not-found{
+  text-align: center;
+  font-weight: bold;
+  font-size: 40px;
+}
+
+.not-found a{
+  color: #777;
+}
+
 /* Homepage Styles */
 .Intro h2 {
   font-size: 36px;
@@ -290,7 +301,7 @@ justify-content: center;
 align-items: center;
 flex-direction: column;
 height: 140px;
-padding: 15px;
+padding: 10px;
 }
 
 .Price-info h3,p{
@@ -316,7 +327,7 @@ padding: 15px;
 
 #popup.show {
   display: block;
-  animation: hide-popup 2s ease-in-out;
+  animation: hide-popup 3s ease-in-out;
 }
 
 @keyframes hide-popup {
@@ -374,6 +385,7 @@ padding: 15px;
 .links a{
   color: white;
   font-weight: 300;
+  font-size: 16px;
 }
 
 /* User Profile */
@@ -432,7 +444,7 @@ padding: 15px;
   display: flex;
   flex-wrap: wrap;
   width: 800px;
-  justify-content: space-between;
+  justify-content: center;
   padding-left: 10px;
   padding-right: 10px;
   margin-top: 10px;
@@ -522,7 +534,7 @@ padding: 15px;
   align-items: center;
   background-color: #777;
   padding: 10px 10px;
-  border-radius: 5px;
+  border-radius: 6px;
 }
 
 .Price-summary p{
@@ -535,4 +547,67 @@ padding: 15px;
   width: auto;
   color: black;
   background-color: greenyellow;
+  position: relative;
+  top:7.5px;
+}
+
+/* Confirmation Page */
+table {
+  margin-top: 20px;
+  border-collapse: collapse;
+  width: 80%;
+  margin-bottom: 20px;
+  border: 1px solid black;
+}
+
+th, td {
+  border-bottom: 1px solid black;
+  text-align: left;
+  padding: 8px;
+  background-color: white;
+}
+
+.Index-Head{
+  border-right: 1px solid black;
+}
+
+th {
+  background-color: antiquewhite;
+}
+
+
+tfoot td {
+  font-weight: bold;
+  font-size: 1.2em;
+  background-color: #777;
+  color: white;
+  border-top: 2px solid black;
+}
+
+tfoot td:first-child {
+  text-align: center;
+}
+
+.Order-Confirm{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #777;
+  padding: 5px 10px;
+  border-radius: 10px;
+}
+
+.Order-Confirm button{
+  padding: 10px;
+  width: auto;
+  color: black;
+  background-color: greenyellow;
+  position: relative;
+  top:7.5px;
+}
+
+.Order-Confirm .Return{
+  background-color: red;
+  top:0px;
 }

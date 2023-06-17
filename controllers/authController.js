@@ -13,32 +13,39 @@ const Logindisplay = (req,res)=>{
 const register = (req,res) =>{
     bcrypt.hash(req.body.password, 10, function(err,hashedPass){
         if (err){
-            req.flash("err",err)
+            req.flash("err","SOme Error Occured")
             console.log(err);
             res.redirect('/SignUp')
         }
-
-        let user = new User({
-            first_name: req.body.first_name,
-            last_name: req.body.last_name,
-            email: req.body.email,
-            password: hashedPass
+        User.findOne({email:req.body.email})
+        .then(check_user=>{
+            if (check_user){
+                req.flash('err','Email Already Exists!');
+                console.log("Email exists in Users!")
+                res.redirect("/Login");
+            }
+            else{
+                let user = new User({
+                    first_name: req.body.first_name,
+                    last_name: req.body.last_name,
+                    email: req.body.email,
+                    password: hashedPass
+                })
+                user.save()
+                .then(()=>{
+                    req.flash("success","User Added Successfully!")
+                    console.log("User Added Successfully!");
+                    let token = jwt.sign({first_name : user.first_name,last_name:user.last_name,email:user.email},"Secret Value")
+                    res.cookie("uid",token);
+                    res.redirect("/Menu");
+                })
+                .catch((err) =>{
+                    req.flash("err","Some Error Occured")
+                    console.log(err);
+                    res.redirect('/SignUp')
+                })
+            }
         })
-    
-        user.save()
-        .then(()=>{
-            req.flash("success","User Added Successfully!")
-            console.log("User Added Successfully!");
-            let token = jwt.sign({first_name : user.first_name,last_name:user.last_name,email:user.email},"Secret Value")
-            res.cookie("uid",token);
-            res.redirect("/Menu");
-        })
-        .catch((err) =>{
-            req.flash("err",err)
-            console.log(err);
-            res.redirect('/SignUp')
-        })
-
     })
 }
 
